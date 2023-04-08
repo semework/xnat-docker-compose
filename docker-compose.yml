@@ -20,7 +20,7 @@ services:
         XNAT_HOME: ${XNAT_HOME}
         XNAT_EMAIL: ${XNAT_EMAIL}
     ports:
-      - 8104:8104
+      - 443:443
     volumes:
       - ./xnat/plugins:${XNAT_HOME}/plugins
       - ./xnat-data/home/logs:${XNAT_HOME}/logs
@@ -62,3 +62,10 @@ services:
     links:
       - xnat-web
 
+networks:
+  my-other-project-network:
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "0.0.0.1"
+    ipam:
+      config:
+        - subnet: "0.0.0.0/443"
